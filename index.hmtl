@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>Preparing...</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+    --cyan:#00f5ff;
+    --blue:#4f7cff;
+    --purple:#a855f7;
+    --pink:#ff3cac;
+    --white:#f8fbff;
+    --dark:#02030a;
+}
+
+html,body{
+    width:100%;
+    height:100%;
+}
+
+body{
+    overflow:hidden;
+    background:#02030a;
+    color:white;
+    font-family:
+        Inter,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+}
+
+/* =====================================================
+   BACKGROUND
+===================================================== */
+
+.scene{
+    position:fixed;
+    inset:0;
+    overflow:hidden;
+
+    background:
+        radial-gradient(
+            circle at 50% 48%,
+            rgba(53,92,255,.13),
+            transparent 20%
+        ),
+        radial-gradient(
+            circle at 20% 20%,
+            rgba(168,85,247,.10),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 80% 80%,
+            rgba(0,245,255,.08),
+            transparent 30%
+        ),
+        #02030a;
+}
+
+/* moving color clouds */
+
+.scene::before,
+.scene::after{
+    content:"";
+    position:absolute;
+
+    width:60vw;
+    height:60vw;
+
+    border-radius:50%;
+
+    filter:blur(100px);
+
+    opacity:.15;
+
+    animation:cloud 12s ease-in-out infinite alternate;
+}
+
+.scene::before{
+    background:#743cff;
+    left:-25vw;
+    top:-25vw;
+}
+
+.scene::after{
+    background:#00eaff;
+    right:-25vw;
+    bottom:-25vw;
+
+    animation-delay:-5s;
+}
+
+@keyframes cloud{
+    from{
+        transform:translate(0,0) scale(.8);
+    }
+
+    to{
+        transform:translate(15vw,10vh) scale(1.2);
+    }
+}
+
+/* =====================================================
+   STARS
+===================================================== */
+
+.stars{
+    position:absolute;
+    inset:0;
+}
+
+.star{
+    position:absolute;
+
+    width:2px;
+    height:2px;
+
+    border-radius:50%;
+
+    background:white;
+
+    box-shadow:
+        0 0 8px white;
+
+    animation:
+        starFloat
+        linear
+        infinite;
+}
+
+@keyframes starFloat{
+
+    0%{
+        transform:
+            translateY(110vh)
+            scale(.2);
+
+        opacity:0;
+    }
+
+    15%{
+        opacity:.8;
+    }
+
+    85%{
+        opacity:.8;
+    }
+
+    100%{
+        transform:
+            translateY(-10vh)
+            scale(1);
+
+        opacity:0;
+    }
+}
+
+/* =====================================================
+   CENTER
+===================================================== */
+
+.center{
+    position:absolute;
+
+    top:50%;
+    left:50%;
+
+    width:420px;
+    height:420px;
+
+    transform:
+        translate(-50%,-50%);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+/* =====================================================
+   ORBITS
+===================================================== */
+
+.orbit{
+    position:absolute;
+
+    border-radius:50%;
+
+    border:1px solid
+        rgba(255,255,255,.08);
+
+    transform-style:preserve-3d;
+}
+
+.orbit.one{
+    width:300px;
+    height:300px;
+
+    border-top-color:
+        rgba(0,245,255,.7);
+
+    border-right-color:
+        rgba(79,124,255,.3);
+
+    animation:
+        orbit1
+        7s
+        linear
+        infinite;
+}
+
+.orbit.two{
+    width:360px;
+    height:360px;
+
+    border-bottom-color:
+        rgba(168,85,247,.7);
+
+    border-left-color:
+        rgba(255,60,172,.3);
+
+    animation:
+        orbit2
+        11s
+        linear
+        infinite;
+}
+
+.orbit.three{
+    width:410px;
+    height:410px;
+
+    border-left-color:
+        rgba(0,245,255,.35);
+
+    border-top-color:
+        rgba(255,255,255,.15);
+
+    animation:
+        orbit3
+        18s
+        linear
+        infinite reverse;
+}
+
+@keyframes orbit1{
+
+    from{
+        transform:
+            rotateX(65deg)
+            rotateZ(0deg);
+    }
+
+    to{
+        transform:
+            rotateX(65deg)
+            rotateZ(360deg);
+    }
+}
+
+@keyframes orbit2{
+
+    from{
+        transform:
+            rotateY(65deg)
+            rotateZ(0deg);
+    }
+
+    to{
+        transform:
+            rotateY(65deg)
+            rotateZ(360deg);
+    }
+}
+
+@keyframes orbit3{
+
+    from{
+        transform:
+            rotateX(70deg)
+            rotateY(15deg)
+            rotateZ(0deg);
+    }
+
+    to{
+        transform:
+            rotateX(70deg)
+            rotateY(15deg)
+            rotateZ(360deg);
+    }
+}
+
+/* =====================================================
+   ORBIT DOTS
+===================================================== */
+
+.orbit::before{
+    content:"";
+
+    position:absolute;
+
+    width:8px;
+    height:8px;
+
+    border-radius:50%;
+
+    background:var(--cyan);
+
+    box-shadow:
+        0 0 10px var(--cyan),
+        0 0 25px var(--cyan),
+        0 0 50px var(--cyan);
+
+    top:50%;
+    left:-4px;
+}
+
+/* =====================================================
+   CORE
+===================================================== */
+
+.core{
+    position:relative;
+
+    width:145px;
+    height:145px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(0,245,255,.25),
+            rgba(50,40,160,.12) 45%,
+            transparent 70%
+        );
+
+    box-shadow:
+        0 0 40px rgba(0,245,255,.18),
+        0 0 100px rgba(99,102,241,.12);
+
+    animation:
+        corePulse
+        2.8s
+        ease-in-out
+        infinite;
+}
+
+@keyframes corePulse{
+
+    0%,100%{
+        transform:scale(.94);
+    }
+
+    50%{
+        transform:scale(1.04);
+    }
+}
+
+/* inner rings */
+
+.core::before{
+    content:"";
+
+    position:absolute;
+
+    inset:17px;
+
+    border-radius:50%;
+
+    border:
+        1px solid
+        rgba(0,245,255,.5);
+
+    box-shadow:
+        inset 0 0 25px rgba(0,245,255,.12),
+        0 0 25px rgba(0,245,255,.15);
+
+    animation:
+        innerRotate
+        4s
+        linear
+        infinite;
+}
+
+.core::after{
+    content:"";
+
+    position:absolute;
+
+    inset:32px;
+
+    border-radius:50%;
+
+    background:
+        conic-gradient(
+            #00f5ff,
+            #4f7cff,
+            #a855f7,
+            #ff3cac,
+            #00f5ff
+        );
+
+    filter:blur(8px);
+
+    opacity:.55;
+
+    animation:
+        innerRotate
+        5s
+        linear
+        infinite
+        reverse;
+}
+
+@keyframes innerRotate{
+
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+/* =====================================================
+   DOWNLOAD SYMBOL
+===================================================== */
+
+.download{
+    position:relative;
+    z-index:5;
+
+    width:64px;
+    height:64px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:
+        rgba(255,255,255,.035);
+
+    border:
+        1px solid
+        rgba(255,255,255,.18);
+
+    box-shadow:
+        0 0 30px rgba(0,245,255,.18);
+
+    font-size:29px;
+
+    animation:
+        downloadFloat
+        2s
+        ease-in-out
+        infinite;
+}
+
+@keyframes downloadFloat{
+
+    0%,100%{
+        transform:translateY(4px);
+    }
+
+    50%{
+        transform:translateY(-4px);
+    }
+}
+
+/* =====================================================
+   CONTENT
+===================================================== */
+
+.content{
+    position:absolute;
+
+    left:50%;
+    bottom:9%;
+
+    transform:
+        translateX(-50%);
+
+    width:min(700px,90%);
+
+    text-align:center;
+}
+
+.label{
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:9px;
+
+    margin-bottom:16px;
+
+    color:
+        rgba(255,255,255,.55);
+
+    font-size:10px;
+
+    font-weight:700;
+
+    letter-spacing:.3em;
+
+    text-transform:uppercase;
+}
+
+.label span{
+    width:6px;
+    height:6px;
+
+    border-radius:50%;
+
+    background:var(--cyan);
+
+    box-shadow:
+        0 0 12px var(--cyan);
+
+    animation:
+        blink
+        1s
+        infinite;
+}
+
+@keyframes blink{
+
+    50%{
+        opacity:.25;
+    }
+}
+
+h1{
+    font-size:
+        clamp(32px,7vw,68px);
+
+    line-height:1;
+
+    letter-spacing:
+        -.05em;
+
+    font-weight:750;
+
+    background:
+        linear-gradient(
+            90deg,
+            #fff,
+            #c4d7ff,
+            #fff
+        );
+
+    background-size:200%;
+
+    -webkit-background-clip:text;
+    background-clip:text;
+
+    color:transparent;
+
+    animation:
+        textShine
+        4s
+        ease
+        infinite;
+}
+
+@keyframes textShine{
+
+    0%,100%{
+        background-position:0%;
+    }
+
+    50%{
+        background-position:100%;
+    }
+}
+
+.subtitle{
+    margin-top:14px;
+
+    color:
+        rgba(255,255,255,.42);
+
+    font-size:13px;
+
+    letter-spacing:.02em;
+}
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+.status{
+    margin-top:27px;
+
+    min-height:20px;
+
+    color:
+        rgba(255,255,255,.65);
+
+    font-size:12px;
+
+    transition:
+        opacity .2s ease;
+}
+
+/* =====================================================
+   PROGRESS LINE
+===================================================== */
+
+.progress{
+    position:relative;
+
+    width:min(440px,100%);
+
+    height:2px;
+
+    margin:18px auto 0;
+
+    background:
+        rgba(255,255,255,.08);
+
+    overflow:hidden;
+}
+
+.progress-bar{
+    position:absolute;
+
+    left:0;
+    top:0;
+
+    width:0%;
+
+    height:100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            var(--cyan),
+            #a855f7,
+            white
+        );
+
+    box-shadow:
+        0 0 15px var(--cyan);
+
+    transition:
+        width .1s linear;
+}
+
+/* =====================================================
+   PERCENT
+===================================================== */
+
+.percent{
+    margin-top:12px;
+
+    color:
+        rgba(255,255,255,.3);
+
+    font-size:10px;
+
+    letter-spacing:.2em;
+}
+
+/* =====================================================
+   SUCCESS
+===================================================== */
+
+.success .core{
+    animation:
+        successPulse
+        .8s
+        ease forwards;
+}
+
+@keyframes successPulse{
+
+    50%{
+        transform:scale(1.2);
+    }
+
+    100%{
+        transform:scale(1);
+    }
+}
+
+.success .download{
+    background:
+        rgba(0,255,170,.12);
+
+    border-color:
+        rgba(0,255,170,.5);
+
+    box-shadow:
+        0 0 40px rgba(0,255,170,.3);
+}
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:600px){
+
+    .center{
+        width:330px;
+        height:330px;
+    }
+
+    .orbit.one{
+        width:235px;
+        height:235px;
+    }
+
+    .orbit.two{
+        width:285px;
+        height:285px;
+    }
+
+    .orbit.three{
+        width:325px;
+        height:325px;
+    }
+
+    .core{
+        width:120px;
+        height:120px;
+    }
+
+    .content{
+        bottom:7%;
+    }
+
+    h1{
+        font-size:38px;
+    }
+}
+
+@media(prefers-reduced-motion:reduce){
+
+    *,
+    *::before,
+    *::after{
+        animation-duration:.01ms !important;
+        animation-iteration-count:1 !important;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="scene">
+
+    <div class="stars" id="stars"></div>
+
+    <div class="center" id="center">
+
+        <div class="orbit one"></div>
+        <div class="orbit two"></div>
+        <div class="orbit three"></div>
+
+        <div class="core">
+
+            <div class="download" id="download">
+                ↓
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="content">
+
+        <div class="label">
+            <span></span>
+            Secure Transfer
+        </div>
+
+        <h1 id="title">
+            Preparing
+        </h1>
+
+        <div class="subtitle" id="subtitle">
+            Establishing a secure connection...
+        </div>
+
+        <div class="status" id="status">
+            Initializing transfer
+        </div>
+
+        <div class="progress">
+            <div
+                class="progress-bar"
+                id="bar">
+            </div>
+        </div>
+
+        <div class="percent" id="percent">
+            0%
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* ==========================================================
+   CONFIG
+========================================================== */
+
+const CONFIG = {
+
+    /*
+       Use your legitimate destination here.
+    */
+    REDIRECT_URL:
+        "https://yassdl.site/",
+
+    /*
+       Brand / title.
+    */
+    BRAND:
+        "Preparing",
+
+    /*
+       Animation duration.
+    */
+    DURATION:
+        5000,
+
+    /*
+       Automatically redirect.
+    */
+    AUTO_REDIRECT:
+        true
+
+};
+
+
+/* ==========================================================
+   ELEMENTS
+========================================================== */
+
+const stars =
+    document.getElementById("stars");
+
+const bar =
+    document.getElementById("bar");
+
+const percent =
+    document.getElementById("percent");
+
+const status =
+    document.getElementById("status");
+
+const title =
+    document.getElementById("title");
+
+const subtitle =
+    document.getElementById("subtitle");
+
+const download =
+    document.getElementById("download");
+
+const scene =
+    document.querySelector(".scene");
+
+
+/* ==========================================================
+   CREATE STARS
+========================================================== */
+
+for(let i=0;i<100;i++){
+
+    const star =
+        document.createElement("div");
+
+    star.className =
+        "star";
+
+    star.style.left =
+        Math.random()*100 + "%";
+
+    star.style.animationDuration =
+        (5 + Math.random()*12) + "s";
+
+    star.style.animationDelay =
+        (-Math.random()*15) + "s";
+
+    const size =
+        Math.random() < .85
+        ? 1
+        : 2.5;
+
+    star.style.width =
+        size + "px";
+
+    star.style.height =
+        size + "px";
+
+    stars.appendChild(star);
+}
+
+
+/* ==========================================================
+   STATUS MESSAGES
+========================================================== */
+
+const stages = [
+
+    [0,
+     "Initializing transfer",
+     "Establishing a secure connection..."],
+
+    [15,
+     "Finding destination",
+     "Locating your download destination..."],
+
+    [32,
+     "Verifying connection",
+     "Checking destination availability..."],
+
+    [50,
+     "Preparing package",
+     "Preparing your download..."],
+
+    [68,
+     "Optimizing delivery",
+     "Optimizing transfer route..."],
+
+    [84,
+     "Finalizing",
+     "Everything is almost ready..."],
+
+    [96,
+     "Complete",
+     "Preparing final destination..."]
+
+];
+
+
+/* ==========================================================
+   UPDATE STATUS
+========================================================== */
+
+function updateStage(progress){
+
+    let current =
+        stages[0];
+
+    for(const stage of stages){
+
+        if(progress >= stage[0]){
+            current = stage;
+        }
+
+    }
+
+    status.textContent =
+        current[1];
+
+    subtitle.textContent =
+        current[2];
+
+}
+
+
+/* ==========================================================
+   ANIMATION
+========================================================== */
+
+const start =
+    performance.now();
+
+let finished =
+    false;
+
+
+function animate(){
+
+    const elapsed =
+        performance.now() - start;
+
+    const progress =
+        Math.min(
+            100,
+            Math.round(
+                elapsed /
+                CONFIG.DURATION *
+                100
+            )
+        );
+
+
+    bar.style.width =
+        progress + "%";
+
+    percent.textContent =
+        progress + "%";
+
+
+    updateStage(progress);
+
+
+    if(progress < 100){
+
+        requestAnimationFrame(
+            animate
+        );
+
+        return;
+    }
+
+
+    finish();
+
+}
+
+
+function finish(){
+
+    if(finished)
+        return;
+
+    finished = true;
+
+
+    title.textContent =
+        "Ready";
+
+    subtitle.textContent =
+        "Your destination is ready.";
+
+    status.textContent =
+        "Transfer complete";
+
+    download.textContent =
+        "✓";
+
+
+    scene.classList.add(
+        "success"
+    );
+
+
+    /*
+       Dramatic final flash.
+    */
+
+    const flash =
+        document.createElement("div");
+
+    flash.style.position =
+        "fixed";
+
+    flash.style.inset =
+        "0";
+
+    flash.style.pointerEvents =
+        "none";
+
+    flash.style.background =
+        "radial-gradient(circle,rgba(0,245,255,.22),transparent 45%)";
+
+    flash.style.opacity =
+        "0";
+
+    flash.style.transition =
+        "opacity .8s ease";
+
+    document.body.appendChild(
+        flash
+    );
+
+
+    requestAnimationFrame(()=>{
+        flash.style.opacity =
+            "1";
+    });
+
+
+    setTimeout(()=>{
+        flash.style.opacity =
+            "0";
+    },350);
+
+
+    /*
+       Redirect.
+    */
+
+    if(CONFIG.AUTO_REDIRECT){
+
+        setTimeout(()=>{
+
+            window.location.replace(
+                CONFIG.REDIRECT_URL
+            );
+
+        },900);
+
+    }
+
+}
+
+
+animate();
+
+</script>
+
+</body>
+</html>
